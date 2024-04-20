@@ -20,8 +20,11 @@ def get_user_page():
 @user_views.route('/users', methods=['POST'])
 def create_user_action():
     data = request.form
-    flash(f"User {data['username']} created!")
-    create_user(data['username'], data['password'])
+    check = create_user(data['username'], data['password'])
+    if check:
+        flash(f"User {data['username']} created!")
+    else:
+        flash(f"User {data['username']} already exists!")
     return redirect(url_for('user_views.get_user_page'))
 
 @user_views.route('/api/users', methods=['GET'])

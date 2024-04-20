@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, flash, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, set_access_cookies
 
-from.index import index_views
+from .index import index_views
 
 from App.controllers import (
     login
@@ -38,7 +38,7 @@ def login_action():
 
 @auth_views.route('/logout', methods=['GET'])
 def logout_action():
-    response = redirect(request.referrer) 
+    response = redirect(url_for('index_views.index_page')) 
     flash("Logged Out!")
     unset_jwt_cookies(response)
     return response
