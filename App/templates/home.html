@@ -5,25 +5,27 @@
 {{ super() }}
 {% block content %}
 
-    <section class="col s12 m3" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
-        
-        {% if selected %}  
-            <div class="row" style="display: flex">
-                <article class="col 12 m16" style="padding:10px">
-                    <div class="card"  style="padding: 20px; height:880px">
-                        <div class="card-title">
-                            <h1 style= "font-size: 30px">{{selected.title}}</h1>
-                        </div>
-                        <div class="card-contents" style="margin-top:50px">
-                            <p>Company: {{selected.company}}</p>
-                            <p>Location: {{selected.location}}</p>
-                            <p>Start date: {{selected.start}}</p>
-                            <p>Duration: {{selected.duration}}</p>
-                            <p>Stipend: {{selected.stipend}}</p>
-                        </div>
+{% if selected %} 
+    <section class="col s12 m6" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
+        <div class="row" style="display: flex">
+            <section class="col 12 m12" style="padding:10px">
+                <div class="card"  style="padding: 20px; height:880px">
+                    <div class="card-title">
+                        <h1 style= "font-size: 30px">{{selected.title}}</h1>
                     </div>
-                </article>
-                <article class= "col s12 m16" style= "padding: 10px">
+                    <div class="card-contents" style="margin-top:50px">
+                        <p>Company: {{selected.company}}</p>
+                        <p>Location: {{selected.location}}</p>
+                        <p>Start date: {{selected.start}}</p>
+                        <p>Duration: {{selected.duration}}</p>
+                        <p>Stipend: {{selected.stipend}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    <section class="col s12 m6" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
+                <article class= "col s12 m12" style= "padding: 10px">
                     <div class="card"  style="padding: 20px">
                         <div class="card-title">
                             <h1 style="font-size: 50px;">Application</h1>
@@ -31,6 +33,10 @@
                         <div class="card-contents" style="font-size: 20px; margin-top:70px;">
                             <form action="/apply/{{selected.id}}" method="POST" enctype="multipart/form-data">
                                 <div style=" width: 500px">
+                                    <div style="display:flex">
+                                        <input placeholder="Username" name="username" type="text" required>
+                                        <input style="margin-left: 30px" placeholder="Password" name="password" type="password" required>
+                                    </div>
                                     <input placeholder="First Name" name="firstname" type="text" required>
                                     <input style="margin-top:20px" placeholder="Last Name"name="lastname" type="text" required>
                                 </div>
@@ -68,29 +74,31 @@
                     </div>
                 </article>
             </div>
-        {% else %}
-
-            {% for internship in internships %}
-            <article class= "col s12 m16" style= "padding: 10px">
-                <div class="card"  style="padding: 20px">
-                <div class="card-title">
-                    <p> {{internship.title}} </p>
-                </div>
-                <div class="card-contents">
-                    <p>Company: {{internship.company}}</p>
-                    <p>Location: {{internship.location}}</p>
-                    <p>Start date: {{internship.start}}</p>
-                    <p>Duration: {{internship.duration}}</p>
-                    <p>Stipend: {{internship.stipend}}</p>
-
-                    <form action="/home/{{internship.id}}" method="GET" style="margin-top:40px">
-                        <button class="btn" type="submit"> Apply </button>
-                    </form>
-                </div>
-                </div>
-            </article>
-            {% endfor %}
-        {% endif %}
     </section>
+{% else %}
+    <section class="col s12 m6" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
+    {% for internship in internships %}
+            <div class= "col s12 m6" style= "padding: 10px">
+                <div class="card"  style="padding: 20px">
+                    <div class="card-title">
+                        <p> {{internship.title}} </p>
+                    </div>
+                    <div class="card-contents">
+                        <p>Company: {{internship.company}}</p>
+                        <p>Location: {{internship.location}}</p>
+                        <p>Start date: {{internship.start}}</p>
+                        <p>Duration: {{internship.duration}}</p>
+                        <p>Stipend: {{internship.stipend}}</p>
+
+                        <form action="/home/{{internship.id}}" method="GET" style="margin-top:40px">
+                            <button class="btn" type="submit"> Apply </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+    </section>
+    
+{% endif %}
 
 {% endblock %}
