@@ -42,3 +42,10 @@ def add_auth_context(app):
           is_authenticated = False
           current_user = None
       return dict(is_authenticated=is_authenticated, current_user=current_user)
+
+
+def verify(username, password):
+  user = User.query.filter_by(username=username).first()
+  if user and user.check_password(password):
+    return user
+  return None

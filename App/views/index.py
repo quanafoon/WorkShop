@@ -33,7 +33,8 @@ def list():
             'email': application.email,
             'phone': application.phone,
             'transcript': application.transcript,
-            'resume': application.resume
+            'resume': application.resume,
+            'user_id': application.user_id
         }
         application_list.append(application_data)
     return jsonify(application_list)
