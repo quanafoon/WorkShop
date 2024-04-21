@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}HOME{% endblock %}
+{% block title %}Home{% endblock %}
 {% block page %}HOME{% endblock %}
 
 {{ super() }}
@@ -7,19 +7,37 @@
 
     <section class="col s12 m3" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
         
-          
-        {% for internship in internships %}
+        {% if selected %}  
+
         <article class= "col s12 m16" style= "padding: 10px">
             <div class="card"  style="padding: 20px">
-            <div class="card-title">
-                <p> {{internship.title}} </p>
-            </div>
-            <div class="card-contents">
-                <p> </p>
-            </div>
+                <div class="card-title">
+                    <h1>{{selected.title}}</h1>
+                </div>
+                <div class="card-contents">
+                    <p>{{selected.company}}</p>
+                </div>
             </div>
         </article>
-        {% endfor %}
+
+        {% else %}
+
+            {% for internship in internships %}
+            <article class= "col s12 m16" style= "padding: 10px">
+                <div class="card"  style="padding: 20px">
+                <div class="card-title">
+                    <p> {{internship.title}} </p>
+                </div>
+                <div class="card-contents">
+                    <p> </p>
+                    <form action="/home/{{internship.id}}" method="GET">
+                        <button class="btn" type="submit"> View </button>
+                    </form>
+                </div>
+                </div>
+            </article>
+            {% endfor %}
+        {% endif %}
     </section>
 
 {% endblock %}
