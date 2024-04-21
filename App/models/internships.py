@@ -8,6 +8,7 @@ class Internships(db.Model):
     start = db.Column(db.String(120))
     duration = db.Column(db.String(120))
     stipend = db.Column(db.String(120))
+    applications = db.relationship('Applications', backref='internship', lazy=True)
 
 
 

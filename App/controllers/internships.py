@@ -27,12 +27,6 @@ def parse_internships():
         db.session.commit()
 
 
-def apply(firstname, lastname, dob, email, phone, transcript_path, resume_path, user_id):
-    application = Applications(firstname=firstname, lastname=lastname, dob=dob, email=email, phone=phone, transcript=transcript_path, resume=resume_path, user_id=user_id)
-    db.session.add(application)
-    db.session.commit()
-    return application
-
 
 def getInternships():
     internships = Internships.query.all()
@@ -41,3 +35,13 @@ def getInternships():
 def findInternship(id):
     internship = Internships.query.filter_by(id=id).first()
     return internship
+
+def apply(firstname, lastname, dob, email, phone, transcript_path, resume_path, user_id, internship_id):
+    application = Applications(firstname=firstname, lastname=lastname, dob=dob, email=email, phone=phone, transcript=transcript_path, resume=resume_path, user_id=user_id, internship_id=internship_id)
+    db.session.add(application)
+    db.session.commit()
+    return application
+
+def getApplications():
+    applications= Applications.query.all()
+    return applications
