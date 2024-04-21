@@ -1,5 +1,6 @@
 from App.database import db
 from .user import User
+from .internships import Internships
 
 class Applications(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -11,8 +12,11 @@ class Applications(db.Model):
     transcript = db.Column(db.String(255))
     resume = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    internship_id = db.Column(db.Integer, db.ForeignKey('internships.id'), nullable=False)
 
-    def __init__(self, firstname, lastname, dob, email, phone, transcript, resume, user_id):
+
+
+    def __init__(self, firstname, lastname, dob, email, phone, transcript, resume, user_id, internship_id):
         self.firstname = firstname
         self.lastname = lastname
         self.dob = dob
@@ -21,3 +25,4 @@ class Applications(db.Model):
         self.transcript = transcript
         self.resume = resume
         self.user_id = user_id
+        self.internship_id = internship_id

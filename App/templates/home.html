@@ -72,7 +72,7 @@
             </div>
     </section>
 {% else %}
-    <section class="col s12 m6" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
+    <section class="col s12 m6" style="margin-top: 5px; overflow-y:scroll; height: 800px">
     {% for internship in internships %}
             <div class= "col s12 m6" style= "padding: 10px">
                 <div class="card"  style="padding: 20px">
@@ -94,7 +94,30 @@
             </div>
     {% endfor %}
     </section>
-    
+    <div class="col s12 m6" style="display: grid">
+        <h1 style = "text-align: center; font-size: 35px;">Applications</h1>
+        <section style="margin-top: 5px; overflow-y:scroll; height: 300px">
+            {% for application in applications %}
+                {% if application.user.id == current_user.id %}
+                    <div class="card"  style="padding: 20px">
+                        <div class="card-title">
+                            <p style="font-size: 20px;"> {{application.internship.title}} </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </section>
+        <h1 style = "text-align: center; font-size: 35px;">Shortlisted Programs</h1>
+        <section style="margin-top: 5px; overflow-y:scroll; height: 400px">
+            {% for application in applications %}
+                    <div class="card"  style="padding: 20px">
+                        <div class="card-title">
+                            <p style="font-size: 20px;"> {{application.internship.title}} </p>
+                        </div>
+                    </div>
+            {% endfor %}
+        </section>
+    </div>
 {% endif %}
 
 {% endblock %}
