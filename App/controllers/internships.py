@@ -1,5 +1,5 @@
 from App.database import db
-from App.models import Internships
+from App.models import Internships, Applications
 import csv
 
 def parse_internships():
@@ -26,3 +26,18 @@ def parse_internships():
             db.session.add(internship)
         db.session.commit()
 
+
+def apply(firstname, lastname, dob, email, phone, transcript_path, resume_path, user_id):
+    application = Applications(firstname=firstname, lastname=lastname, dob=dob, email=email, phone=phone, transcript=transcript_path, resume=resume_path, user_id=user_id)
+    db.session.add(application)
+    db.session.commit()
+    return application
+
+
+def getInternships():
+    internships = Internships.query.all()
+    return internships
+
+def findInternship(id):
+    internship = Internships.query.filter_by(id=id).first()
+    return internship
