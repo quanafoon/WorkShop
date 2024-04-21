@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, jsonify, request, flash, send_from
 from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, set_access_cookies
 
 from .index import index_views
+from .home import home_views
 
 from App.controllers import (
     login
@@ -28,11 +29,12 @@ def identify_page():
 def login_action():
     data = request.form
     token = login(data['username'], data['password'])
-    response = redirect(request.referrer)
     if not token:
         flash('Bad username or password given'), 401
+        response = redirect(request.referrer)
     else:
         flash('Login Successful')
+        response = redirect(url_for('home_views.home_page')) 
         set_access_cookies(response, token) 
     return response
 
