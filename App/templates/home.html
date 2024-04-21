@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}HOME{% endblock %}
+{% block page %}HOME{% endblock %}
+
+{{ super() }}
+{% block content %}
+
+    <section class="col s12 m3" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
+        
+          
+        {% for internship in internships %}
+        <article class= "col s12 m16" style= "padding: 10px">
+            <div class="card"  style="padding: 20px">
+            <div class="card-title">
+                <p> {{internship.title}} </p>
+            </div>
+            <div class="card-contents">
+                <p> </p>
+            </div>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+
+{% endblock %}
