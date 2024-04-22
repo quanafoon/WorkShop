@@ -64,7 +64,7 @@
                                     </div>
                                 </div> 
 
-                                <button type="submit" class="btn" style="background-color:#30738E; margin-top:50px">APPLY</button>
+                                <button type="submit" class="btn-large" style=" margin-top:50px">APPLY</button>
                             </form>
                         </div>
                     </div>
@@ -122,9 +122,9 @@
         <div style="overflow-y:scroll; height:580px">
             {% for internship in internships %}
             {% if internship.company_id == current_user.id %}
-            <div class="card" style="height: 230px; padding: 5px;">
+            <div class="card" style="height: 250px; padding: 5px;">
                 <div style="display: flex;">
-                    <div style= "font-size:17px; margin-left:40px">
+                    <div style= "font-size:17px; margin-left:35px">
                         <p style="font-size:25px">{{internship.title}}</p>
                         <p>Stipend: {{internship.stipend}}</p>
                         <p>Start: {{internship.start}}</p>
