@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block page %}HOME{% endblock %}
+
+{{ super() }}
+{% block content %}
+
+{% if current_user.role == 'company' %}
+    <div class="col s12 m6" style=" margin-top:5px;">
+        <h1 style="font-size:30px; text-align: center;">Projects</h1>
+        <div style="overflow-y:scroll; height:530px">
+            {% for internship in internships %}
+            {% if internship.company_id == current_user.id %}
+            <div class="card" style="height: 200px; padding: 5px;">
+                <p>Title: {{internship.title}}</p>
+                <p>Stipend: {{internship.stipend}}</p>
+                <p>Start: {{internship.start}}</p>
+                <p>Duration: {{internship.duration}}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col s12 m6" style="margin-top:5px">
+        <div class="card" style="height:600px; width:400px; margin-left: 30px; padding:10px; ">
+            <h1 style="font-size:30px; text-align: center;">Post an Internship Project</h1>
+            <form  method="POST" action="/submitProject/{{current_user.id}}" style=" align-items: center; width: 250px; margin-left:20px; margin-top:80px;">
+                <input placeholder="title" name="title" type="text" required>
+                <input placeholder="Company Name" name="company" type="text" required>
+                <input placeholder="location" name="location" type="text">
+                <input placeholder="start date" name="start" type="text">
+                <input placeholder="duration" name="duration" type="text">
+                <input placeholder="stipend" name="stipend" type="text">
+                <button type="submit" class="btn" style="background-color:#30738E; margin-top:50px">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+  
+{% endif %}
+
+{% if current_user.role == 'admin' %}
+
+    
+    <div class="col s12 m6" style=" margin-top:15px;">
+        <h1 style="font-size:30px; text-align: center;">Application</h1>
+        <div class="card" style="height: 460px; padding: 5px;">
+            {% if selected %}
+                <div style="font-size:20px; margin-left: 30px;">
+                    <p>First Name: &nbsp;&nbsp;{{selected.firstname}}</p>
+                    <p>Last Name: &nbsp;&nbsp;{{selected.lastname}}</p>
+                    <p>Date of Birth: &nbsp;&nbsp;{{selected.dob}}</p>
+                    <p>E-mail : &nbsp;&nbsp;{{selected.email}}</p>
+                    <p>Phone number: &nbsp;&nbsp;{{selected.phone}}</p>
+                </div>
+                <form style="margin-top:101px">
+                    <button type="submit" class="btn-large" style="width:600px">ADD TO SHORTLIST</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col s12 m6" style=" margin-top:5px;">
+        <h1 style="font-size:30px; text-align: center;">Students</h1>
+        <div style="height:500px; overflow-y:scroll">
+            {% for application in applications %}
+            <div class="card" style="height: 100px; padding: 5px;">
+                <div style="display: flex;">
+                    <div class="card-contents">
+                        <p style="margin-left:20px; margin-top: 30px; font-size:20px">{{application.firstname}} {{application.lastname}}</p>
+                    </div>
+                    <form style="margin-left:120px; margin-top:20px" action="/details/{{application.id}},{{application.internship_id}}" method="GET">
+                    <button " class="waves-effect waves-light btn-large" type="submit">View Application</p>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}
