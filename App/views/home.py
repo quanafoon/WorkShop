@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, url_for, flash
-from App.controllers import create_user, parse_internships, apply, getInternships, findInternship, getApplications
+from App.controllers import apply, getInternships, findInternship, getApplications, addProject
 from flask_jwt_extended import jwt_required, current_user
 import os
 from werkzeug.utils import secure_filename
@@ -47,3 +47,19 @@ def apply_action(id):
     else:
         flash("Error")
     return redirect(url_for('home_views.home_page'))
+
+@home_views.route('/submitProject/<int:id>', methods=['POST'])
+def submit_action(id):
+    title = request.form.get('title')
+    company = request.form.get('company')
+    location = request.form.get('location')
+    start = request.form.get('start')
+    duration = request.form.get('duration')
+    stipend = request.form.get('stipend')
+
+    project = addProject(title, company, id, location, start, duration, stipend)
+    if project:
+        flash("project submitted!")
+    else:
+        flash("Error")
+    return render_template('home.html')

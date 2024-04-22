@@ -9,7 +9,7 @@
         <h1>Flask MVC</h1>
         <p> Welcome {{current_user.username}} </p>
         
-    {% else %}
+    {% else %} 
 
     <div class="row">
         <section class="col s12 m4" style=" margin-left:200px" >
@@ -29,6 +29,7 @@
             <div class="card" style="height:500px; width: 450px;">
                 <h1 style=" font-family: cursive">SIGN UP</h1>
         <form  method="POST" action="/signup" style=" align-items: center; width: 250px; margin-left:20px; margin-top:80px">
+           
             <div class="input-field">
                 <input placeholder="username" name="username" type="text" required>
                 <label for="username">username</label>
@@ -42,6 +43,7 @@
                 <option value="student">Student</option>
                 <option value="company">Company</option>
             </select>
+            
             <button type="submit" class="btn" style="background-color:#30738E">SIGN UP</button>
         </form>
         <div style="margin-top: 50px; display: flex; margin-left:20px">
@@ -55,5 +57,5 @@
 
 
     </div>
-    {% endif %}
+    {% endif %} 
 {% endblock %}

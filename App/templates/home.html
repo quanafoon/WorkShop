@@ -120,4 +120,36 @@
     </div>
 {% endif %}
 {% endif %}
+
+{% if current_user.role == 'company' %}
+    <div class="col s12 m6" style="overflow-y:scroll; margin-top:5px">
+        <h1 style="font-size:30px; text-align: center;">Projects</h1>
+        {% for internship in internships %}
+        {% if internship.company_id == current_user.id %}
+        <div class="card" style="height: 200px; padding: 5px">
+            <p>Title: {{internship.title}}</p>
+            <p>Stipend: {{internship.stipend}}</p>
+            <p>Start: {{internship.start}}</p>
+            <p>Duration: {{internship.duration}}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col s12 m6" style="margin-top:5px">
+        <div class="card" style="height:600px; width:400px; margin-left: 30px; padding:10px; ">
+            <h1 style="font-size:30px; text-align: center;">Post an Internship Project</h1>
+            <form  method="POST" action="/submitProject/{{current_user.id}}" style=" align-items: center; width: 250px; margin-left:20px; margin-top:80px;">
+                <input placeholder="title" name="title" type="text" required>
+                <input placeholder="Company Name" name="company" type="text" required>
+                <input placeholder="location" name="location" type="text">
+                <input placeholder="start date" name="start" type="text">
+                <input placeholder="duration" name="duration" type="text">
+                <input placeholder="stipend" name="stipend" type="text">
+                <button type="submit" class="btn" style="background-color:#30738E; margin-top:50px">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+
 {% endblock %}

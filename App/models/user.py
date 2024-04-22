@@ -6,8 +6,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    applications = db.relationship('Applications', backref='user', lazy=True)
     role = db.Column(db.String(120), nullable=False, default='student')
+    applications = db.relationship('Applications', backref='user', lazy=True)
+    interships = db.relationship('Internships', backref='user', lazy=True)
 
     def __init__(self, username, password, role='student'):
         self.username = username
