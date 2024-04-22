@@ -127,11 +127,13 @@
         <div style="overflow-y:scroll; height:530px">
             {% for internship in internships %}
             {% if internship.company_id == current_user.id %}
-            <div class="card" style="height: 200px; padding: 5px;">
-                <p>Title: {{internship.title}}</p>
-                <p>Stipend: {{internship.stipend}}</p>
-                <p>Start: {{internship.start}}</p>
-                <p>Duration: {{internship.duration}}</p>
+            <div class="card" style="height: 230px; padding: 5px;">
+                <div style= "font-size:17px; margin-left:30px">
+                    <p style="font-size:25px">{{internship.title}}</p>
+                    <p>Stipend: {{internship.stipend}}</p>
+                    <p>Start: {{internship.start}}</p>
+                    <p>Duration: {{internship.duration}}</p>
+                </div>
             </div>
             {% endif %}
             {% endfor %}
