@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
-from App.models import db, Applications
+from App.models import db, Applications, Shortlist
 from App.controllers import create_user #, parse_internships
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
@@ -21,7 +21,7 @@ def init():
 def health_check():
     return jsonify({'status':'healthy'})
 
-@index_views.route('/lister', methods=['GET'])
+@index_views.route('/applicationsList', methods=['GET'])
 def list():
     applications = Applications.query.all()
     application_list = []
@@ -39,3 +39,17 @@ def list():
         }
         application_list.append(application_data)
     return jsonify(application_list)
+
+
+@index_views.route('/shortlistList', methods=['GET'])
+def list2():
+    shortlist = Shortlist.query.all()
+    shortlist_list = []
+    for item in shortlist:
+        shortlist_data = {
+            'id': item.id,
+            'application_id': item.application_id,
+            'internship_id': item.internship_id,
+        }
+        shortlist_list.append(shortlist_data)
+    return jsonify(shortlist_list)

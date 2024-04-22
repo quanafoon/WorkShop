@@ -167,7 +167,7 @@
                         <p style="margin-left:20px; font-size: 20px;">Company name: {{internship.company}}</p>
                     </div>
                     <form style="margin-left:120px; margin-top:60px" action="/home/{{internship.id}}" method="GET">
-                    <button " class="waves-effect waves-light btn-large" type="submit">View</p>
+                        <button class="waves-effect waves-light btn-large" type="submit">View</p>
                     </form>
                 </div>
             </div>
@@ -176,21 +176,21 @@
     </div>
     <div class="col s12 m6" style=" margin-top:15px;">
         <h1 style="font-size:30px; text-align: center;">Internship Details</h1>
-            <div class="card" style="height: 460px; padding: 5px;">
-                {% if selected %}
-                    <div style="font-size:20px; margin-left: 30px;">
-                        <p>Title: &nbsp;&nbsp;{{selected.company}}</p>
-                        <p>Company: &nbsp;&nbsp;{{selected.company}}</p>
-                        <p>Location: &nbsp;&nbsp;{{selected.location}}</p>
-                        <p>Start date: &nbsp;&nbsp;{{selected.start}}</p>
-                        <p>Duration: &nbsp;&nbsp;{{selected.duration}}</p>
-                        <p>Stipend: &nbsp;&nbsp;{{selected.stipend}}</p>
-                    </div>
-                    <form style="margin-top:101px">
-                        <button type="submit" class="btn-large" style="width:600px">VIEW APPLICATIONS</button>
-                    </form>
-                {% endif %}
-            </div>
+        <div class="card" style="height: 460px; padding: 5px;">
+            {% if selected %}
+                <div style="font-size:20px; margin-left: 30px;">
+                    <p>Title: &nbsp;&nbsp;{{selected.company}}</p>
+                    <p>Company: &nbsp;&nbsp;{{selected.company}}</p>
+                    <p>Location: &nbsp;&nbsp;{{selected.location}}</p>
+                    <p>Start date: &nbsp;&nbsp;{{selected.start}}</p>
+                    <p>Duration: &nbsp;&nbsp;{{selected.duration}}</p>
+                    <p>Stipend: &nbsp;&nbsp;{{selected.stipend}}</p>
+                </div>
+                <form style="margin-top:101px" action="/adminShortlist/{{selected.id}}">
+                    <button type="submit" class="btn-large" style="width:600px">VIEW APPLICATIONS</button>
+                </form>
+            {% endif %}
+        </div>
     </div>
 
 {% endif %}

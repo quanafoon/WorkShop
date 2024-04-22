@@ -46,6 +46,14 @@ def getApplications():
     applications= Applications.query.all()
     return applications
 
+def findApplication(id):
+    application = Applications.query.filter_by(id=id).first()
+    return application
+
+def getAppsForInternship(id):
+    applications= Applications.query.filter_by(internship_id=id).all()
+    return applications
+
 def addProject(title, company, company_id, location=None, start=None, duration=None, stipend=None):
     project = Internships(title=title, company=company, location=location, start=start, duration=duration, stipend=stipend, company_id=company_id)
     db.session.add(project)
