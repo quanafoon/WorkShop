@@ -135,9 +135,9 @@
                         <p>Start: {{internship.start}}</p>
                         <p>Duration: {{internship.duration}}</p>
                     </div>
-                    <div style="margin-left: 100px; margin-top: 80px; display: flex">
-                        <form>
-                            <button type="submit" class="btn-large">VIEW</button>
+                    <div style="margin-left: 80px; margin-top: 80px; display: flex">
+                        <form action="/companyShortlist/{{internship.id}}" method="GET">
+                            <button type="submit" class="btn-large">VIEW DETAILS</button>
                         </form>
                         <form action="/removeProject/{{internship.id}}" method="POST">
                             <button style="margin-left:25px; background-color: #FF3737;" type="submit" class="btn-large">DELETE</button>
@@ -191,14 +191,14 @@
         <div class="card" style="height: 460px; padding: 5px;">
             {% if selected %}
                 <div style="font-size:20px; margin-left: 30px;">
-                    <p>Title: &nbsp;&nbsp;{{selected.company}}</p>
+                    <p>Title: &nbsp;&nbsp;{{selected.title}}</p>
                     <p>Company: &nbsp;&nbsp;{{selected.company}}</p>
                     <p>Location: &nbsp;&nbsp;{{selected.location}}</p>
                     <p>Start date: &nbsp;&nbsp;{{selected.start}}</p>
                     <p>Duration: &nbsp;&nbsp;{{selected.duration}}</p>
                     <p>Stipend: &nbsp;&nbsp;{{selected.stipend}}</p>
                 </div>
-                <form style="margin-top:101px" action="/adminShortlist/{{selected.id}}">
+                <form style="margin-top:101px" action="/adminShortlist/{{selected.id}}" method="GET">
                     <button type="submit" class="btn-large" style="width:600px">VIEW APPLICATIONS</button>
                 </form>
             {% endif %}
