@@ -16,7 +16,9 @@ def home_page():
 @home_views.route('/home/<int:id>', methods=['GET'])
 def selectInternship(id):
     selected = findInternship(id)
-    return render_template('home.html', selected=selected)
+    internships = getInternships()
+    applications = getApplications()
+    return render_template('home.html', internships=internships, applications=applications, selected=selected)
 
 @home_views.route('/apply/<int:id>', methods=['POST'])
 @jwt_required()
@@ -62,4 +64,4 @@ def submit_action(id):
         flash("project submitted!")
     else:
         flash("Error")
-    return render_template('home.html')
+    return redirect(url_for('home_views.home_page'))
