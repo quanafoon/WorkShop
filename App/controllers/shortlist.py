@@ -9,6 +9,10 @@ def findShortlist(id):
     shortlist = Shortlist.query.filter_by(id=id).first()
     return shortlist
 
+def getShortlistForInternship(id):
+    shortlist = Shortlist.query.filter_by(internship_id=id).all()
+    return shortlist
+
 def addToShortlist(application_id, internship_id):
     check = Shortlist.query.filter_by(application_id=application_id).first()
     if check:

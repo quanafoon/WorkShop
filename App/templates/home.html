@@ -73,8 +73,10 @@
     </section>
 {% else %}
     <section class="col s12 m6" style="margin-top: 5px; overflow-y:scroll; height: 800px">
+        <h1 style = "text-align: center; font-size: 35px;">All Internships</h1>
+
     {% for internship in internships %}
-            <div class= "col s12 m6" style= "padding: 10px">
+            <div class= "col s12 m6">
                 <div class="card"  style="padding: 20px">
                     <div class="card-title">
                         <p> {{internship.title}} </p>
@@ -96,25 +98,18 @@
     </section>
     <div class="col s12 m6" style="display: grid">
         <h1 style = "text-align: center; font-size: 35px;">Applications</h1>
-        <section style="margin-top: 5px; overflow-y:scroll; height: 300px">
+        <section style="margin-top: 5px; overflow-y:scroll; height: 600px; width:600px">
             {% for application in applications %}
                 {% if application.user.id == current_user.id %}
-                    <div class="card"  style="padding: 20px">
+                    <div class="card"  style="padding: 20px; display:flex">
                         <div class="card-title">
-                            <p style="font-size: 20px;"> {{application.internship.title}} </p>
+                            <p style="font-size: 20px; margin-left: 30px;"> {{application.internship.title}}, {{application.internship.company}} </p>
                         </div>
+                        <form style="margin-left:120px; margin-top:10px" action="/home/{{application.id}}" method="GET">
+                            <button class="waves-effect waves-light btn-large" type="submit">View Details</p>
+                        </form>
                     </div>
                 {% endif %}
-            {% endfor %}
-        </section>
-        <h1 style = "text-align: center; font-size: 35px;">Shortlisted Programs</h1>
-        <section style="margin-top: 5px; overflow-y:scroll; height: 400px">
-            {% for application in applications %}
-                    <div class="card"  style="padding: 20px">
-                        <div class="card-title">
-                            <p style="font-size: 20px;"> {{application.internship.title}} </p>
-                        </div>
-                    </div>
             {% endfor %}
         </section>
     </div>
@@ -124,30 +119,45 @@
 {% if current_user.role == 'company' %}
     <div class="col s12 m6" style=" margin-top:5px;">
         <h1 style="font-size:30px; text-align: center;">Projects</h1>
-        <div style="overflow-y:scroll; height:530px">
+        <div style="overflow-y:scroll; height:580px">
             {% for internship in internships %}
             {% if internship.company_id == current_user.id %}
-            <div class="card" style="height: 200px; padding: 5px;">
-                <p>Title: {{internship.title}}</p>
-                <p>Stipend: {{internship.stipend}}</p>
-                <p>Start: {{internship.start}}</p>
-                <p>Duration: {{internship.duration}}</p>
+            <div class="card" style="height: 230px; padding: 5px;">
+                <div style="display: flex;">
+                    <div style= "font-size:17px; margin-left:40px">
+                        <p style="font-size:25px">{{internship.title}}</p>
+                        <p>Stipend: {{internship.stipend}}</p>
+                        <p>Start: {{internship.start}}</p>
+                        <p>Duration: {{internship.duration}}</p>
+                    </div>
+                    <div style="margin-left: 80px; margin-top: 80px; display: flex">
+                        <form action="/companyShortlist/{{internship.id}}" method="GET">
+                            <button type="submit" class="btn-large">VIEW DETAILS</button>
+                        </form>
+                        <form action="/removeProject/{{internship.id}}" method="POST">
+                            <button style="margin-left:25px; background-color: #FF3737;" type="submit" class="btn-large">DELETE</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             {% endif %}
             {% endfor %}
         </div>
     </div>
     <div class="col s12 m6" style="margin-top:5px">
-        <div class="card" style="height:600px; width:400px; margin-left: 30px; padding:10px; ">
-            <h1 style="font-size:30px; text-align: center;">Post an Internship Project</h1>
-            <form  method="POST" action="/submitProject/{{current_user.id}}" style=" align-items: center; width: 250px; margin-left:20px; margin-top:80px;">
-                <input placeholder="title" name="title" type="text" required>
-                <input placeholder="Company Name" name="company" type="text" required>
-                <input placeholder="location" name="location" type="text">
-                <input placeholder="start date" name="start" type="text">
-                <input placeholder="duration" name="duration" type="text">
-                <input placeholder="stipend" name="stipend" type="text">
-                <button type="submit" class="btn" style="background-color:#30738E; margin-top:50px">SUBMIT</button>
+        <div class="card" style="height:600px; width:500px; margin-left: 30px;">
+            <h1 style="font-size:30px; text-align: center; padding: 40px">Post an Internship Project</h1>
+            <form  method="POST" action="/submitProject/{{current_user.id}}" style=" width: 400px; margin-top:50px;">
+                <div style="margin-left:100px">
+                        <input placeholder="title" name="title" type="text" required>
+                        <input placeholder="Company Name" name="company" type="text" required>
+                        <input placeholder="location" name="location" type="text">
+                        <input placeholder="start date" name="start" type="text">
+                        <input placeholder="duration" name="duration" type="text">
+                        <input placeholder="stipend" name="stipend" type="text">
+                    </div>
+
+                    <button type="submit" class="btn-large" style="width:500px; margin-top:62px;">SUBMIT</button>
             </form>
         </div>
     </div>
@@ -167,7 +177,7 @@
                         <p style="margin-left:20px; font-size: 20px;">Company name: {{internship.company}}</p>
                     </div>
                     <form style="margin-left:120px; margin-top:60px" action="/home/{{internship.id}}" method="GET">
-                        <button class="waves-effect waves-light btn-large" type="submit">View</p>
+                        <button class="waves-effect waves-light btn-large" type="submit">View Details</p>
                     </form>
                 </div>
             </div>
@@ -179,14 +189,14 @@
         <div class="card" style="height: 460px; padding: 5px;">
             {% if selected %}
                 <div style="font-size:20px; margin-left: 30px;">
-                    <p>Title: &nbsp;&nbsp;{{selected.company}}</p>
+                    <p>Title: &nbsp;&nbsp;{{selected.title}}</p>
                     <p>Company: &nbsp;&nbsp;{{selected.company}}</p>
                     <p>Location: &nbsp;&nbsp;{{selected.location}}</p>
                     <p>Start date: &nbsp;&nbsp;{{selected.start}}</p>
                     <p>Duration: &nbsp;&nbsp;{{selected.duration}}</p>
                     <p>Stipend: &nbsp;&nbsp;{{selected.stipend}}</p>
                 </div>
-                <form style="margin-top:101px" action="/adminShortlist/{{selected.id}}">
+                <form style="margin-top:101px" action="/adminShortlist/{{selected.id}}" method="GET">
                     <button type="submit" class="btn-large" style="width:600px">VIEW APPLICATIONS</button>
                 </form>
             {% endif %}

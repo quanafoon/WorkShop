@@ -59,3 +59,12 @@ def addProject(title, company, company_id, location=None, start=None, duration=N
     db.session.add(project)
     db.session.commit()
     return project
+
+def deleteProject(id):
+    internship = Internships.query.filter_by(id=id).first()
+    if internship:
+        db.session.delete(internship)
+        db.session.commit()
+    else:
+        return None
+    return internship
