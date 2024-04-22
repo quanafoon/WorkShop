@@ -128,11 +128,21 @@
             {% for internship in internships %}
             {% if internship.company_id == current_user.id %}
             <div class="card" style="height: 230px; padding: 5px;">
-                <div style= "font-size:17px; margin-left:30px">
-                    <p style="font-size:25px">{{internship.title}}</p>
-                    <p>Stipend: {{internship.stipend}}</p>
-                    <p>Start: {{internship.start}}</p>
-                    <p>Duration: {{internship.duration}}</p>
+                <div style="display: flex;">
+                    <div style= "font-size:17px; margin-left:40px">
+                        <p style="font-size:25px">{{internship.title}}</p>
+                        <p>Stipend: {{internship.stipend}}</p>
+                        <p>Start: {{internship.start}}</p>
+                        <p>Duration: {{internship.duration}}</p>
+                    </div>
+                    <div style="margin-left: 100px; margin-top: 80px; display: flex">
+                        <form>
+                            <button type="submit" class="btn-large">VIEW</button>
+                        </form>
+                        <form action="/removeProject/{{internship.id}}" method="POST">
+                            <button style="margin-left:25px; background-color: #FF3737;" type="submit" class="btn-large">DELETE</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             {% endif %}

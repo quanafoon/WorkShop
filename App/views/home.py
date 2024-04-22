@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, url_for, flash
-from App.controllers import apply, getInternships, findInternship, getApplications, addProject
+from App.controllers import apply, getInternships, findInternship, getApplications, addProject, deleteProject
 from flask_jwt_extended import jwt_required, current_user
 import os
 from werkzeug.utils import secure_filename
@@ -62,6 +62,15 @@ def submit_action(id):
     project = addProject(title, company, id, location, start, duration, stipend)
     if project:
         flash("project submitted!")
+    else:
+        flash("Error")
+    return redirect(url_for('home_views.home_page'))
+
+@home_views.route('/removeProject/<int:id>', methods=['POST'])
+def delete_action(id):
+    internship = deleteProject(id)
+    if internship:
+        flash("Sucessfully Deleted!")
     else:
         flash("Error")
     return redirect(url_for('home_views.home_page'))
