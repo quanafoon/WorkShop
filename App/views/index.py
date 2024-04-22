@@ -13,6 +13,7 @@ def init():
     db.drop_all()
     db.create_all()
     create_user('bob', 'bobpass')
+    create_user('admin','adminpass', 'admin')
     #parse_internships()
     return jsonify(message='db initialized!')
 

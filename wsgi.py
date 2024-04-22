@@ -18,6 +18,7 @@ def initialize():
     db.create_all()
     #parse_internships()
     create_user('bob', 'bobpass')
+    create_user('admin', 'adminpass', 'admin')
     print('database intialized')
 
 '''
