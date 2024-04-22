@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, jsonify, url_for, flash
-from App.controllers import findApplication, getApplications, getShortlists, getAppsForInternship
+from App.controllers import findApplication, getApplications, getShortlists, getAppsForInternship, addToShortlist
 from flask_jwt_extended import jwt_required, current_user
 import os
 
@@ -17,3 +17,13 @@ def admin_view(appID, internshipID):
     applications = getAppsForInternship(internshipID)
     selected = findApplication(appID)
     return render_template('shortlist.html', applications=applications, selected=selected)
+
+
+@shortlist_views.route('/addShortlist/<int:appID>,<int:internshipID>', methods=['POST'])
+def addShortlist(appID, internshipID):
+    shortlist = addToShortlist(appID, internshipID)
+    if shortlist:
+        flash("Added to shortlist!")
+    else:
+        flash("Already added")
+    return redirect(url_for('shortlist_views.admin_page', id=internshipID))

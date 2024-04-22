@@ -52,8 +52,8 @@
                     <p>E-mail : &nbsp;&nbsp;{{selected.email}}</p>
                     <p>Phone number: &nbsp;&nbsp;{{selected.phone}}</p>
                 </div>
-                <form style="margin-top:101px">
-                    <button type="submit" class="btn-large" style="width:600px">ADD TO SHORTLIST</button>
+                <form action="/addShortlist/{{selected.id}},{{selected.internship_id}}" method="POST" style="margin-top:150px">
+                    <button type="submit" class="btn-large" style="width:602px">ADD TO SHORTLIST</button>
                 </form>
             {% endif %}
         </div>
