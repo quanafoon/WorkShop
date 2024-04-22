@@ -4,7 +4,7 @@
 
 {{ super() }}
 {% block content %}
-
+{% if current_user.role == 'student' %}
 {% if selected %} 
     <section class="col s12 m6" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
         <div class="row" style="display: flex">
@@ -119,5 +119,5 @@
         </section>
     </div>
 {% endif %}
-
+{% endif %}
 {% endblock %}
