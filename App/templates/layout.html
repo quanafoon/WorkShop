@@ -16,9 +16,11 @@
     
       <nav style="background-color: #386679;">
           <div class="nav-wrapper">
-              <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
+              <a href="/home" class="brand-logo center">{% block page %}{% endblock %}</a>
               <ul id="nav-mobile" class="left">
+                  {% if is_authenticated %}
                   <li><a href="/home">Home</a></li>
+                  {% endif %}
                   <li><a href="/users">Users Jinja</a></li>
                   {% if is_authenticated %}
                     <li><a href="/identify">Identify</a></li>
@@ -27,7 +29,8 @@
               </ul>
               {% if is_authenticated %}
               <ul id="nav-mobile" class="right">
-                <li><button class="btn" id="logoutBtn">Logout</button></li>
+                <li><a href="/logout">Logout</a></li>
+             
               </ul>
              
               {% endif %}
@@ -44,12 +47,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-      document.getElementById("logoutBtn").addEventListener("click", function() {
-        var confirmLogout = confirm("Are you sure you want to logout?");
-        if (confirmLogout) {
-          window.location.href = "/logout";
-        } else {}
-      });
+      
        M.AutoInit();
 
         {% with messages = get_flashed_messages() %}

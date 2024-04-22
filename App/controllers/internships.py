@@ -1,7 +1,7 @@
 from App.database import db
 from App.models import Internships, Applications
 import csv
-
+'''
 def parse_internships():
     with open('internships.csv', newline='', encoding='utf-8') as csvfile:
         csvreader = csv.reader(csvfile)  
@@ -25,7 +25,7 @@ def parse_internships():
             )
             db.session.add(internship)
         db.session.commit()
-
+'''
 
 
 def getInternships():
@@ -46,6 +46,8 @@ def getApplications():
     applications= Applications.query.all()
     return applications
 
-def addProject(title, company, location=None, start=None, duration=None, stipend=None):
-    project = Internships(title, company, location, start, duration, stipend)
+def addProject(title, company, company_id, location=None, start=None, duration=None, stipend=None):
+    project = Internships(title=title, company=company, location=location, start=start, duration=duration, stipend=stipend, company_id=company_id)
+    db.session.add(project)
+    db.session.commit()
     return project
