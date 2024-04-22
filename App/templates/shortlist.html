@@ -8,9 +8,10 @@
 {% if current_user.role == 'company' %}
     <div class="col s12 m6" style=" margin-top:15px;">
         <h1 style="font-size:30px; text-align: center;">Application</h1>
-        <div class="card" style="height: 460px; padding: 5px;">
+        <div class="card" style="height: 680px; padding: 5px;">
             {% if selected %}
-                <div style="font-size:20px; margin-left: 30px;">
+                <p style="font-size: 30px;"> Description: </p>
+                <div style="font-size:20px; margin-left: 30px; margin-top: 60px">
                     <p>First Name: &nbsp;&nbsp;{{selected.firstname}}</p>
                     <p>Last Name: &nbsp;&nbsp;{{selected.lastname}}</p>
                     <p>Date of Birth: &nbsp;&nbsp;{{selected.dob}}</p>
@@ -20,24 +21,37 @@
             {% endif %}
         </div>
     </div>
-    <div class="col s12 m6" style=" margin-top:5px;">
-        <h1 style="font-size:30px; text-align: center;">Shortlisted Students</h1>
-        <div style="height:500px; overflow-y:scroll">
-            {% for student in shortlist %}
-            <div class="card" style="height: 100px; padding: 5px;">
-                <div style="display: flex;">
-                    <div class="card-contents">
-                        <p style="margin-left:20px; margin-top: 30px; font-size:20px">{{student.application.firstname}} {{student.application.lastname}}</p>
-                    </div>
-                    <form style="margin-left:120px; margin-top:20px" action="/details/{{student.application_id}},{{student.internship_id}}" method="GET">
-                    <button " class="waves-effect waves-light btn-large" type="submit">View Application</p>
-                    </form>
-                </div>
+    <div class="col s12 m6" style= "display: grid">
+        <div style=" margin-top:5px;">
+            <h1 style="font-size:30px; text-align: center;">Internship Details</h1>
+            <div style="height:250px; overflow-y:scroll">
+                <div class="card" style="font-size:20px; padding: 30px;">
+                    <p>Title: &nbsp;&nbsp;{{internship.title}}</p>
+                    <p>Company: &nbsp;&nbsp;{{internship.company}}</p>
+                    <p>Location: &nbsp;&nbsp;{{internship.location}}</p>
+                    <p>Start date: &nbsp;&nbsp;{{internship.start}}</p>
+                    <p>Duration: &nbsp;&nbsp;{{internship.duration}}</p>
+                    <p>Stipend: &nbsp;&nbsp;{{internship.stipend}}</p>
             </div>
-            {% endfor %}
+        </div>
+        <div style=" margin-top:5px;">
+            <h1 style="font-size:30px; text-align: center;">Shortlisted Students</h1>
+            <div style="height:350px; overflow-y:scroll">
+                {% for student in shortlist %}
+                <div class="card" style="height: 100px; padding: 5px;">
+                    <div style="display: flex;">
+                        <div class="card-contents">
+                            <p style="margin-left:20px; margin-top: 30px; font-size:20px">{{student.application.firstname}} {{student.application.lastname}}</p>
+                        </div>
+                        <form style="margin-left:120px; margin-top:20px" action="/details/{{student.application_id}},{{student.internship_id}}" method="GET">
+                        <button " class="waves-effect waves-light btn-large" type="submit">View Application</p>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-  
 {% endif %}
 
 {% if current_user.role == 'admin' %}
@@ -45,9 +59,10 @@
     
     <div class="col s12 m6" style=" margin-top:15px;">
         <h1 style="font-size:30px; text-align: center;">Application</h1>
-        <div class="card" style="height: 460px; padding: 5px;">
+        <div class="card" style="height: 576px; padding: 5px;">
             {% if selected %}
-                <div style="font-size:20px; margin-left: 30px;">
+                <p style="font-size: 30px;"> Description: </p>
+                <div style="font-size:20px; margin-left: 30px; margin-top:60px">
                     <p>First Name: &nbsp;&nbsp;{{selected.firstname}}</p>
                     <p>Last Name: &nbsp;&nbsp;{{selected.lastname}}</p>
                     <p>Date of Birth: &nbsp;&nbsp;{{selected.dob}}</p>
@@ -60,21 +75,40 @@
             {% endif %}
         </div>
     </div>
-    <div class="col s12 m6" style=" margin-top:5px;">
-        <h1 style="font-size:30px; text-align: center;">Students</h1>
-        <div style="height:500px; overflow-y:scroll">
-            {% for application in applications %}
-            <div class="card" style="height: 100px; padding: 5px;">
-                <div style="display: flex;">
-                    <div class="card-contents">
-                        <p style="margin-left:20px; margin-top: 30px; font-size:20px">{{application.firstname}} {{application.lastname}}</p>
+    <div class="col s12 m6" style="display:grid">
+        <div style=" margin-top:5px;">
+            <h1 style="font-size:30px; text-align: center;">Applied Students</h1>
+            <div style="height:250px; overflow-y:scroll">
+                {% for application in applications %}
+                <div class="card" style="height: 100px; padding: 5px;">
+                    <div style="display: flex;">
+                        <div class="card-contents">
+                            <p style="margin-left:20px; margin-top: 30px; font-size:20px">{{application.firstname}} {{application.lastname}}</p>
+                        </div>
+                        <form style="margin-left:120px; margin-top:20px" action="/details/{{application.id}},{{application.internship_id}}" method="GET">
+                        <button " class="waves-effect waves-light btn-large" type="submit">View Application</p>
+                        </form>
                     </div>
-                    <form style="margin-left:120px; margin-top:20px" action="/details/{{application.id}},{{application.internship_id}}" method="GET">
-                    <button " class="waves-effect waves-light btn-large" type="submit">View Application</p>
-                    </form>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        </div>
+        <div style=" margin-top:5px;">
+            <h1 style="font-size:30px; text-align: center;">Shortlisted Students</h1>
+            <div style="height:250px; overflow-y:scroll">
+                {% for student in shortlist %}
+                <div class="card" style="height: 100px; padding: 5px;">
+                    <div style="display: flex;">
+                        <div class="card-contents">
+                            <p style="margin-left:20px; margin-top: 30px; font-size:20px">{{student.application.firstname}} {{student.application.lastname}}</p>
+                        </div>
+                        <form style="margin-left:120px; margin-top:20px" action="/details/{{student.application_id}},{{student.internship_id}}" method="GET">
+                        <button " class="waves-effect waves-light btn-large" type="submit">View Application</p>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endif %}

@@ -9,21 +9,24 @@ shortlist_views = Blueprint('shortlist_views', __name__, template_folder='../tem
 @shortlist_views.route('/adminShortlist/<int:id>', methods=['GET'])
 def admin_page(id):
     applications = getAppsForInternship(id)
-    return render_template('shortlist.html', applications=applications)
+    shortlist = getShortlistForInternship(id)
+    return render_template('shortlist.html', applications=applications, shortlist=shortlist)
 
 
 @shortlist_views.route('/companyShortlist/<int:id>', methods=['GET'])
 def company_page(id):
     shortlist = getShortlistForInternship(id)
-    return render_template('shortlist.html', shortlist=shortlist)
+    internship= findInternship(id)
+    return render_template('shortlist.html', shortlist=shortlist, internship=internship)
 
 
 @shortlist_views.route('/details/<int:appID>,<int:internshipID>', methods=['GET'])
-def admin_view(appID, internshipID):
+def details_view(appID, internshipID):
     applications = getAppsForInternship(internshipID)
     shortlist = getShortlistForInternship(internshipID)
     selected = findApplication(appID)
-    return render_template('shortlist.html', applications=applications, selected=selected, shortlist=shortlist)
+    internship= findInternship(internshipID)
+    return render_template('shortlist.html', internship=internship, applications=applications, selected=selected, shortlist=shortlist)
 
 
 @shortlist_views.route('/addShortlist/<int:appID>,<int:internshipID>', methods=['POST'])
