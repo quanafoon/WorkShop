@@ -1,5 +1,22 @@
 from App.database import db
 from App.models import Internships, Applications, Shortlist
+import csv
+
+def parse_shortlists():
+    with open('shortlists.csv', newline='', encoding='utf-8') as csvfile:
+        csvreader = csv.reader(csvfile)  
+        header = next(csvreader)
+
+        for row in csvreader: 
+            internship_id = row[0]
+            application_id = row[1]
+
+            shortlist = Shortlist(
+                internship_id=internship_id,
+                application_id=application_id
+            )
+            db.session.add(shortlist)
+        db.session.commit()
 
 def getShortlists():
     shortlists = Shortlist.query.all()

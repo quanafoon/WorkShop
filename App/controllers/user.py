@@ -1,5 +1,24 @@
 from App.models import User
 from App.database import db
+import csv
+
+def parse_users():
+    with open('users.csv', newline='', encoding='utf-8') as csvfile:
+        csvreader = csv.reader(csvfile)  
+        header = next(csvreader)
+
+        for row in csvreader: 
+            username = row[0]
+            password = row[1]
+            role = row[2]
+
+            user = User(
+                username=username,
+                password=password,
+                role=role
+            )
+            db.session.add(user)
+        db.session.commit()
 
 def create_user(username, password, role="student"):
     check = User.query.filter_by(username=username).first()
