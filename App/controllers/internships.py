@@ -45,3 +45,7 @@ def apply(firstname, lastname, dob, email, phone, transcript_path, resume_path, 
 def getApplications():
     applications= Applications.query.all()
     return applications
+
+def addProject(title, company, location=None, start=None, duration=None, stipend=None):
+    project = Internships(title, company, location, start, duration, stipend)
+    return project
