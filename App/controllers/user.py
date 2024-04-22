@@ -1,12 +1,12 @@
 from App.models import User
 from App.database import db
 
-def create_user(username, password):
+def create_user(username, password, role="student"):
     check = User.query.filter_by(username=username).first()
     if check:
         return None
     else:
-        newuser = User(username=username, password=password)
+        newuser = User(username=username, password=password, role=role)
         db.session.add(newuser)
         db.session.commit()
         return newuser

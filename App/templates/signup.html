@@ -12,7 +12,7 @@
     {% else %}
 
     <div class="row">
-        <section class="col s12 m4" style=" margin-left:100px" >
+        <section class="col s12 m4" style=" margin-left:200px" >
             <div class="card" style="height:500px; width:295px; background-color: #7468D4;">
                 <h1 style="padding:30px;margin-left:5px; font-size: 40px; font-family: cursive; color: white;">Signing up is easy </h1>
                 <div class-"card-contents" style="padding:20px; margin-right: 10px; font-family: cursive; color: white;">
@@ -26,7 +26,7 @@
         
 
         <section class="col s12 m4">
-            <div class="card" style="height:500px; width: 450px; ">
+            <div class="card" style="height:500px; width: 450px;">
                 <h1 style=" font-family: cursive">SIGN UP</h1>
         <form  method="POST" action="/signup" style=" align-items: center; width: 250px; margin-left:20px; margin-top:80px">
             <div class="input-field">
@@ -37,9 +37,14 @@
                 <input name="password" type="password" required>
                 <label for="password">Password</label>
             </div>
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+                <option value="student">Student</option>
+                <option value="company">Company</option>
+            </select>
             <button type="submit" class="btn" style="background-color:#30738E">SIGN UP</button>
         </form>
-        <div style="margin-top: 80px; display: flex; margin-left:20px">
+        <div style="margin-top: 50px; display: flex; margin-left:20px">
             <p>Already have an account?</p>
             <form action="/" method="GET">
                 <button type="submit" class="btn" style="background-color:#30738E; margin-left:10px"> LOGIN</button>
