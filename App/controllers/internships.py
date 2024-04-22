@@ -85,6 +85,13 @@ def getAppsForInternship(id):
     applications= Applications.query.filter_by(internship_id=id).all()
     return applications
 
+def getUserApplied(id, user_id):
+    applications = getAppsForInternship(id)
+    for app in applications:
+        if app.user_id == user_id:
+            return True
+    return False
+
 def addProject(title, company, company_id, location=None, start=None, duration=None, stipend=None):
     project = Internships(title=title, company=company, location=location, start=start, duration=duration, stipend=stipend, company_id=company_id)
     db.session.add(project)

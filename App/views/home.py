@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, url_for, flash
-from App.controllers import apply, getInternships, findInternship, getApplications, addProject, deleteProject
+from App.controllers import apply, getInternships, findInternship, getApplications, addProject, deleteProject, getUserApplied
 from flask_jwt_extended import jwt_required, current_user
 import os
 from werkzeug.utils import secure_filename
@@ -14,11 +14,13 @@ def home_page():
     return render_template('home.html', internships=internships, applications=applications)
 
 @home_views.route('/home/<int:id>', methods=['GET'])
+@jwt_required()
 def selectInternship(id):
     selected = findInternship(id)
     internships = getInternships()
     applications = getApplications()
-    return render_template('home.html', internships=internships, applications=applications, selected=selected)
+    isUserApplied = getUserApplied(id, current_user.id)
+    return render_template('home.html', internships=internships, applications=applications, selected=selected, isUserApplied=isUserApplied)
 
 @home_views.route('/apply/<int:id>', methods=['POST'])
 @jwt_required()
