@@ -7,8 +7,8 @@ class User(db.Model):
     username =  db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
     role = db.Column(db.String(120), nullable=False, default='student')
-    applications = db.relationship('Applications', backref='user', lazy=True)
-    interships = db.relationship('Internships', backref='user', lazy=True)
+    applications = db.relationship('Applications', backref='user', lazy=True, cascade='all, delete-orphan')
+    interships = db.relationship('Internships', backref='user', lazy=True, cascade='all, delete-orphan')
 
     def __init__(self, username, password, role='student'):
         self.username = username

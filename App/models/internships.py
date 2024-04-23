@@ -9,8 +9,8 @@ class Internships(db.Model):
     duration = db.Column(db.String(120))
     stipend = db.Column(db.String(120))
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    applications = db.relationship('Applications', backref='internship', lazy=True)
-
+    applications = db.relationship('Applications', backref='internship', lazy=True, cascade='all, delete-orphan')
+    shortlist = db.relationship('Shortlist', backref='internships', lazy=True, cascade='all, delete-orphan')
 
 
     def __init__(self, title, company, location, start, duration, stipend, company_id):

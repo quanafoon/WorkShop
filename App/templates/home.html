@@ -97,7 +97,7 @@
         {% endfor %}
         </section>
     </section>
-    <section class="col s12 m6" style="margin-top: 5px; height: 86vh">
+    <section class="col s12 m6" style="margin-top: 5px; height: 40vh">
         <h1 style = "text-align: center; font-size: 35px; margin: 10px;">Applied Internships</h1>
         <section style="margin-top: 5px; overflow-y:scroll; height: 100%; width:100%">
             {% for application in applications %}
@@ -112,6 +112,20 @@
                         </form>
                     </div>
                 {% endif %}
+            {% endfor %}
+        </section>
+        <h1 style = "text-align: center; font-size: 35px; margin: 10px;">Shortlisted Internships</h1>
+        <section style="margin-top: 5px; overflow-y:scroll; height: 100%; width:100%">
+            {% for shortlist in userShortlists %}
+                <div class="card"  style="margin: 0.5rem; padding: 20px; display:flex; flex-direction: row; align-items: center; justify-content: space-between;">
+                    <div class="card-title">
+                        <p style="font-size: 20px; margin-right: 30px;"> {{shortlist.internship.title}} </p>
+                        <p style="font-size: 20px; margin-right: 30px;"> {{shortlist.internship.company}} </p>
+                    </div>
+                    <form action="/home/{{shortlist.id}}" method="GET">
+                        <button class="waves-effect waves-light btn-large" type="submit">View Details</p>
+                    </form>
+                </div>
             {% endfor %}
         </section>
     </section>

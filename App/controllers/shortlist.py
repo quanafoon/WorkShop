@@ -18,6 +18,17 @@ def parse_shortlists():
             db.session.add(shortlist)
         db.session.commit()
 
+def getUserShortlistedApplications(id):
+    shortlistItems = Shortlist.query.all()
+    applications = Applications.query.filter_by(user_id=id).all()
+    apps = []
+    for app in applications:
+        for item in shortlistItems:
+            if (app.id == item.application_id):
+                apps.append(app)
+
+    return apps
+
 def getShortlists():
     shortlists = Shortlist.query.all()
     return shortlists
@@ -39,3 +50,12 @@ def addToShortlist(application_id, internship_id):
         db.session.add(shortlist)
         db.session.commit()
         return shortlist
+
+def deleteFromShortlist(id):
+    shortlist = Shortlists.query.filter_by(id=id).first()
+    if shortlist:
+        db.session.delete(shortlist)
+        db.session.commit()
+    else:
+        return None
+    return shortlist

@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, url_for, flash
-from App.controllers import apply, getInternships, findInternship, getApplications, addProject, deleteProject, getUserApplied
+from App.controllers import apply, getInternships, findInternship, getApplications, addProject, deleteProject, getUserApplied, getUserShortlistedApplications
 from flask_jwt_extended import jwt_required, current_user
 import os
 from werkzeug.utils import secure_filename
@@ -8,10 +8,12 @@ from werkzeug.utils import secure_filename
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
 
 @home_views.route('/home', methods=['GET'])
+@jwt_required()
 def home_page():
     internships = getInternships()
     applications = getApplications()
-    return render_template('home.html', internships=internships, applications=applications)
+    userShortlists = getUserShortlistedApplications(current_user.id)
+    return render_template('home.html', internships=internships, applications=applications, userShortlists=userShortlists)
 
 @home_views.route('/home/<int:id>', methods=['GET'])
 @jwt_required()

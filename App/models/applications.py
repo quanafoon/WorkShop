@@ -13,7 +13,7 @@ class Applications(db.Model):
     resume = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     internship_id = db.Column(db.Integer, db.ForeignKey('internships.id'), nullable=False)
-
+    shortlist = db.relationship('Shortlist', backref='applications', lazy=True, cascade='all, delete-orphan')
 
 
     def __init__(self, firstname, lastname, dob, email, phone, transcript, resume, user_id, internship_id):
