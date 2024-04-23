@@ -11,42 +11,35 @@
         
     {% else %}
 
-    <div class="row">
-        <section class="col s12 m4" style=" margin-left:100px" >
-            <div class="card" style="height:500px; width:500px">
-                <h1 style="margin-left: 80px; font-family: cursive">LOGIN</h1>
-                <form  method="POST" action="/login" style=" align-items: center; width: 250px; margin-left:20px; margin-top:80px">
-                    <div class="input-field">
-                        <input placeholder="username" name="username" type="text" class="validate" required>
-                        <label for="username">username</label>
-                    </div>
-                    <div class="input-field" >
-                        <input placeholder="password" name="password" type="password" class="validate" required>
-                        <label for="password">Password</label>
-                    </div>
-                    <button type="submit" class="btn" style="background-color:#30738E">Login</button>
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="card" style="height:500px;width:500px;display: flex;flex-direction: column;align-items: center;margin: 5px;">
+            <h1>LOGIN</h1>
+            <form method="POST" action="/login" style="align-items: center;width: 250px;">
+                <div class="input-field">
+                    <input placeholder="username" name="username" type="text" class="validate valid" required="">
+                    <label for="username" class="active">Username</label>
+                </div>
+                <div class="input-field">
+                    <input placeholder="password" name="password" type="password" class="validate valid" required="">
+                    <label for="password" class="active">Password</label>
+                </div>
+                <button type="submit" class="waves-effect waves-light btn" style="background-color:#30738E">Login</button>
+            </form>
+            <div style="margin-top: 80px;display: flex;align-items: center;">
+                <p>Don't have an account?</p>
+                <form action="/signup" method="GET">
+                    <button type="submit" class="waves-effect waves-light btn" style="background-color:#30738E; margin-left:10px"> SIGN UP</button>
                 </form>
-                <div style="margin-top: 80px; display: flex; margin-left:20px">
-                    <p>Don't have an account?</p>
-                    <form action="/signup" method="GET">
-                        <button type="submit" class="btn" style="background-color:#30738E; margin-left:10px"> SIGN UP</button>
-                    </form>
-                </div>
             </div>
-        </section>
+        </div>
 
-
-        <section class="col s12 m4">
-            <div class="card" style="height:500px; width: 450px; background-color: #7468D4;">
-                <h1 style="text-align: center; font-family: cursive; color: white;"> Hi There ! </h1>
-                <div class-"card-contents" style="padding:20px">
-                    <p style="font-family:cursive; color:white; margin-top: 50px;">A little about us:</p>
-                    <p style="font-family:cursive; color:white">This website offers a comprehensive platform designed to facilitate various aspects of internship management. From browsing available opportunities to submitting applications and managing shortlists, the website provides a seamless experience for both students and companies</p>
-                </div>
+        <div class="card" style="height:500px;width: 500px;background-color: #7468D4;margin: 5px;display: flex;flex-direction: column;align-items: center;">
+            <h1 style="color: white;"> Hi There ! </h1>
+            <div class-"card-contents"="" style="padding:20px">
+                <p style="color:white;">A little about us:</p>
+                <p style="color:white">This website offers a comprehensive platform designed to facilitate various aspects of internship management. From browsing available opportunities to submitting applications and managing shortlists, the website provides a seamless experience for both students and companies</p>
             </div>
-        </section>
-
-
+        </div>
     </div>
     {% endif %}
 {% endblock %}

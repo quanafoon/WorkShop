@@ -10,6 +10,7 @@ function loadTable(users){
         table.innerHTML += `<tr>
             <td>${user.id}</td>
             <td>${user.username}</td>
+            <td>${user.role}</td>
         </tr>`;
     }
 }

@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, jsonify, url_for, flash
-from App.controllers import findApplication, findInternship, getApplications, getShortlists, getAppsForInternship, addToShortlist, getShortlistForInternship
+from App.controllers import findApplication, findInternship, getApplications, getShortlists, getAppsForInternship, addToShortlist, getShortlistForInternship, getUserShortlistedApplications, deleteFromShortlist
 from flask_jwt_extended import jwt_required, current_user
 import os
 
@@ -36,4 +36,13 @@ def addShortlist(appID, internshipID):
         flash("Added to shortlist!")
     else:
         flash("Already added")
-    return redirect(url_for('shortlist_views.admin_page', id=internshipID))
+    return redirect(url_for('shortlist_views.details_view', appID=appID, internshipID=internshipID))
+
+@shortlist_views.route('/removeFromShortlist/<int:appID>,<int:internshipID>', methods=['POST'])
+def delete_action(appID, internshipID):
+    shortlist = deleteFromShortlist(appID, internshipID)
+    if shortlist:
+        flash("Successfully Deleted!")
+    else:
+        flash("Error")
+    return redirect(url_for('shortlist_views.details_view', appID=appID, internshipID=internshipID))

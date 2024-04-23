@@ -29,7 +29,7 @@
               </ul>
               {% if is_authenticated %}
               <ul id="nav-mobile" class="right">
-                <li><a href="/logout">Logout</a></li>
+                <li><button class="waves-effect btn-large" id="logoutBtn" style="margin: 0px 10px">Logout</button></li>
              
               </ul>
              
@@ -46,6 +46,14 @@
     <div class="row" id="content">{% block content %}{% endblock %}</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.getElementById("logoutBtn").addEventListener("click", function() {
+          var confirmLogout = confirm("Are you sure you want to logout?");
+          if (confirmLogout) {
+              window.location.href = "/logout";
+          } else {}
+      });
+    </script>
     <script>
       
        M.AutoInit();
