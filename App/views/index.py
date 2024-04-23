@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
 from App.models import db, Applications, Shortlist
-from App.controllers import create_user #, parse_internships
+from App.controllers import create_user
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
@@ -14,7 +14,6 @@ def init():
     db.create_all()
     create_user('bob', 'bobpass')
     create_user('admin','adminpass', 'admin')
-    #parse_internships()
     return jsonify(message='db initialized!')
 
 @index_views.route('/health', methods=['GET'])

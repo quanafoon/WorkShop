@@ -51,8 +51,8 @@ def addToShortlist(application_id, internship_id):
         db.session.commit()
         return shortlist
 
-def deleteFromShortlist(id):
-    shortlist = Shortlists.query.filter_by(id=id).first()
+def deleteFromShortlist(appID, internshipID):
+    shortlist = Shortlist.query.filter_by(application_id=appID, internship_id=internshipID).first()
     if shortlist:
         db.session.delete(shortlist)
         db.session.commit()
