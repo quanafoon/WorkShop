@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
-{% block title %}Stepping Stone{% endblock %}
-{% block page %}Stepping Stone{% endblock %}
+{% block title %}WorkShop{% endblock %}
+{% block page %}Workshop{% endblock %}
 
 {{ super() }}
 
@@ -10,7 +10,7 @@
         <p> Welcome {{current_user.username}} </p>
         
     {% else %}
-
+    <div back>
     <div class="row" style="display: flex; justify-content: center;">
         <div class="card" style="height:500px;width:500px;display: flex;flex-direction: column;align-items: center;margin: 5px;">
             <h1>LOGIN</h1>
@@ -42,4 +42,5 @@
         </div>
     </div>
     {% endif %}
+    </div>
 {% endblock %}
