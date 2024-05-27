@@ -7,9 +7,15 @@ from werkzeug.utils import secure_filename
 
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
 
+
+@home_views.route('/', methods=['GET'])
+def home_page():
+    return render_template('home.html')
+
+
 @home_views.route('/home', methods=['GET'])
 @jwt_required()
-def home_page():
+def home_page2():
     internships = getInternships()
     applications = getApplications()
     userShortlists = getUserShortlistedApplications(current_user.id)
