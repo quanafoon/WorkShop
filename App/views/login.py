@@ -2,13 +2,11 @@ from flask import Blueprint, redirect, render_template, request, send_from_direc
 from App.models import db, Applications, Shortlist
 from App.controllers import create_user
 
-index_views = Blueprint('index_views', __name__, template_folder='../templates')
+login_views = Blueprint('login_views', __name__, template_folder='../templates')
 
-@index_views.route('/', methods=['GET'])
-def index_page():
-    return render_template('index.html')
 
-@index_views.route('/init', methods=['GET'])
+
+@login_views.route('/init', methods=['GET'])
 def init():
     db.drop_all()
     db.create_all()
@@ -16,11 +14,12 @@ def init():
     create_user('admin','adminpass', 'admin')
     return jsonify(message='db initialized!')
 
-@index_views.route('/health', methods=['GET'])
-def health_check():
-    return jsonify({'status':'healthy'})
+@login_views.route('/login', methods=['GET'])
+def home_page():
+    return render_template('login.html')
 
-@index_views.route('/applicationsList', methods=['GET'])
+
+@login_views.route('/applicationsList', methods=['GET'])
 def list():
     applications = Applications.query.all()
     application_list = []
@@ -40,7 +39,7 @@ def list():
     return jsonify(application_list)
 
 
-@index_views.route('/shortlistList', methods=['GET'])
+@login_views.route('/shortlistList', methods=['GET'])
 def list2():
     shortlist = Shortlist.query.all()
     shortlist_list = []

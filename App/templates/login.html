@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title %}WorkShop{% endblock %}
+{% block page %}Workshop{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+    {% if is_authenticated %}
+        <h1>Flask MVC</h1>
+        <p> Welcome {{current_user.username}} </p>
+        
+    {% else %}
+    <div class= "bg" style="height:700px">
+        
+        <div class="row" style=" display: flex; ">   
+            <div class="login-cards" style="margin-left: 0px; margin-top:0px; background-color: #2C3E50; ">
+                <h1 style="color: aliceblue;">LOGIN</h1>
+                <form method="POST" action="/login" style="align-items: center;width: 250px;">
+                    <div class="input-field">
+                        <input style="color:white" placeholder="username" name="username" type="text" class="validate valid" required="">
+                        <label for="username" class="active">Username</label>
+                    </div>
+                    <div class="input-field">
+                        <input style="color:white" placeholder="password" name="password" type="password" class="validate valid" required="">
+                        <label for="password" class="active">Password</label>
+                    </div>
+                    <button type="submit" class="waves-effect waves-light btn" style="background-color:#30738E">Login</button>
+                </form>
+                <div style="margin-top: 80px;display: flex;align-items: center;">
+                    <p style="color:aliceblue">Don't have an account?</p>
+                    <form action="/signup" method="GET">
+                        <button type="submit" class="waves-effect waves-light btn" style="background-color:#30738E; margin-left:10px"> SIGN UP</button>
+                    </form>
+                </div>
+            </div>
+            <div class="login-cards" style="width: 600px;">
+                <h1 style="color: white;"> Welcome! </h1>
+                <div class-"card-contents"="" style="padding:20px">
+                    <p style="color:white;">A little about us:</p>
+                    <p style="color:white">Workshop is your go-to platform for job seekers and businesses in Trinidad and Tobago. Discover exciting job opportunities, post vacancies hassle-free, and connect with top talent. We're committed to fostering professional growth and driving economic development in the nation. Join us today!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+   
+{% endblock %}
