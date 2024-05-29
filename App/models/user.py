@@ -6,14 +6,17 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    role = db.Column(db.String(120), nullable=False, default='student')
-    applications = db.relationship('Applications', backref='user', lazy=True, cascade='all, delete-orphan')
-    interships = db.relationship('Internships', backref='user', lazy=True, cascade='all, delete-orphan')
+    firstName = db.Column(db.String(120))
+    lastName = db.Column(db.String(120))
+    pic = db.Column(db.String(120))
+    
 
-    def __init__(self, username, password, role='student'):
+    def __init__(self, username, password, firstName, lastName, pic):
         self.username = username
         self.set_password(password)
-        self.role = role
+        self.firstName = firstName
+        self.lastName = lastName
+        self.pic = pic
 
     def get_json(self):
         return{
