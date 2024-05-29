@@ -10,12 +10,16 @@ def parse_users():
         for row in csvreader: 
             username = row[0]
             password = row[1]
-            role = row[2]
+            firstName = row[2]
+            lastName = row[3]
+            pic = row[4]
 
             user = User(
-                username=username,
-                password=password,
-                role=role
+                username = username,
+                password = password,
+                firstName = firstName,
+                lastName = lastName,
+                pic = pic
             )
             db.session.add(user)
         db.session.commit()

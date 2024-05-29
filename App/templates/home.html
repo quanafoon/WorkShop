@@ -21,7 +21,20 @@
             </div>
         </section>
     </section>
-    
+
+    <section class="col s12 m8" style="margin-top: 5px; height: 86vh; overflow-y: scroll; ">
+        <section style = "display: flex; flex-wrap: wrap;">
+            {% for user in users %}
+            <div class="card"  style="width:250px; padding:10px; margin-left:10px">
+                <div class="card-contents" style="margin-top:30px; text-align: center;">
+                    <img src="{{user.pic}}" class="circle "> </p>
+                    <p>{{user.firstName}} {{user.lastName}}</p>
+                    <p>Any other info will go here</p>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </section>
 
 {% if current_user.role == 'company' %}
     <section class="col s12 m6" style="margin-top: 5px; height: 86vh">
