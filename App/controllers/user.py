@@ -24,12 +24,12 @@ def parse_users():
             db.session.add(user)
         db.session.commit()
 
-def create_user(username, password, role="student"):
+def create_user(username, password, firstName, lastName):
     check = User.query.filter_by(username=username).first()
     if check:
         return None
     else:
-        newuser = User(username=username, password=password, role=role)
+        newuser = User(username=username, password=password, firstName=firstName, lastName=lastName, pic="/static/images/profile.jpg")
         db.session.add(newuser)
         db.session.commit()
         return newuser

@@ -10,10 +10,10 @@ def signup_page():
 @signup_views.route('/signup', methods=['POST'])
 def signup_action():
     data = request.form
-    check = create_user(data['username'], data['password'], data['role'])
+    check = create_user(data['username'], data['password'], data['firstName'], data['lastName'])
     if check:
         flash(f"User {data['username']} created!")
-        return render_template('index.html')
+        return render_template('login.html')
     else:
         flash(f"User {data['username']} already exists!")
         return render_template('signup.html')
