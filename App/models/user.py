@@ -6,8 +6,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    firstName = db.Column(db.String(120))
-    lastName = db.Column(db.String(120))
+    firstName = db.Column(db.String(120), nullable=False)
+    lastName = db.Column(db.String(120), nullable=False)
     pic = db.Column(db.String(120))
     
 
